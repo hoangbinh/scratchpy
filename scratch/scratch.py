@@ -1,5 +1,4 @@
 import array
-import itertools
 import socket
 import struct
 import sys
@@ -57,7 +56,6 @@ class Scratch(object):
         # TODO: what if the number is bigger than an int or float?
         
         # convert to string (rather than bytes)
-        s = s.decode(encoding='UTF-8')
         if s.startswith("\"") and s.endswith("\""):
             return s[1:-1]
         elif s.find('.') != -1: 
@@ -138,7 +136,7 @@ class Scratch(object):
         # combine into a dict using iterators (both elements in the list
         # inputted to izip have a reference to the same iterator). even 
         # elements are keys, odd are values
-        return dict(itertools.izip(*[iter(unescaped)]*2)) 
+        return dict(zip(*[iter(unescaped)]*2))
 
     def _parse(self, msg):
         """
